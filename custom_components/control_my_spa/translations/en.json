@@ -161,6 +161,9 @@
       },
       "total_alerts": {
         "name": "Total alerts"
+      },
+      "spa_clock": {
+        "name": "Spa clock"
       }
     },
     "light": {

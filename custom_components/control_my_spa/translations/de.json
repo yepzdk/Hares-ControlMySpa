@@ -143,6 +143,9 @@
       },
       "total_alerts": {
         "name": "Warnungen gesamt"
+      },
+      "spa_clock": {
+        "name": "Spa-Uhr"
       }
     },
     "select": {

@@ -161,6 +161,9 @@
       },
       "total_alerts": {
         "name": "Samlede advarsler"
+      },
+      "spa_clock": {
+        "name": "Spa-ur"
       }
     },
     "light": {

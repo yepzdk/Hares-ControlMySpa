@@ -17,6 +17,7 @@ from .energy import (
     SpaCirculationPumpEnergySensor
 )
 from .alerts import SpaFaultMessageSensor, SpaTotalAlertsSensor
+from .clock import SpaClockSensor
 import logging
 
 _LOGGER = logging.getLogger(__name__)
@@ -104,6 +105,7 @@ async def async_setup_entry(hass: HomeAssistant, config_entry, async_add_entitie
 
     entities.append(SpaFaultMessageSensor(shared_data, device_info, unique_id_suffix))
     entities.append(SpaTotalAlertsSensor(shared_data, device_info, unique_id_suffix))
+    entities.append(SpaClockSensor(shared_data, device_info, unique_id_suffix))
 
     async_add_entities(entities, True)
     _LOGGER.debug("START Śensor control_my_spa")
@@ -126,6 +128,7 @@ __all__ = [
     "SpaCirculationPumpEnergySensor",
     "SpaFaultMessageSensor",
     "SpaTotalAlertsSensor",
+    "SpaClockSensor",
     "async_setup_entry",
 ]
 
