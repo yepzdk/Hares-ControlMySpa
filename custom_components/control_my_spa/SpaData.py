@@ -1,5 +1,6 @@
 from homeassistant.helpers.event import async_track_time_interval
 import logging
+from time import monotonic
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -13,6 +14,8 @@ class SpaData:
         self._update_interval = None  # Handler pro interval
         self._is_updating = False  # Příznak zda běží aktualizace
         self._last_interval = None  # Poslední použitý interval
+        self._tick = 0
+        self._last_tick_at = None
 
     async def update(self):
         """Aktualizace dat z webového dotazu."""
@@ -51,7 +54,19 @@ class SpaData:
 
     async def _periodic_update(self, _):
         """Interní metoda pro pravidelnou aktualizaci."""
+        started = monotonic()
+        gap = started - self._last_tick_at if self._last_tick_at is not None else None
+        self._last_tick_at = started
+        self._tick += 1
         await self.update()
+        duration = monotonic() - started
+        _LOGGER.info(
+            "Tick #%d: gap=%s duration=%.2fs data=%s",
+            self._tick,
+            f"{gap:.1f}s" if gap is not None else "first",
+            duration,
+            "OK" if self._data else "NONE",
+        )
 
     def register_subscriber(self, subscriber):
         """Registrace odběratele."""
