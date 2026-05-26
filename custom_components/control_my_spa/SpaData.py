@@ -60,7 +60,7 @@ class SpaData:
         self._tick += 1
         await self.update()
         duration = monotonic() - started
-        _LOGGER.info(
+        _LOGGER.debug(
             "Tick #%d: gap=%s duration=%.2fs data=%s",
             self._tick,
             f"{gap:.1f}s" if gap is not None else "first",
